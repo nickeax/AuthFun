@@ -54,6 +54,7 @@ namespace AuthFun.Controllers
                 var claims = new List<Claim>();
                 claims.Add(new Claim("username", username));
                 claims.Add(new Claim(ClaimTypes.NameIdentifier, username));
+                claims.Add(new Claim(ClaimTypes.Name, "Bob Edward Jones"));
                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 var claimsPrinciple = new ClaimsPrincipal(claimsIdentity);
                 await HttpContext.SignInAsync(claimsPrinciple);
@@ -62,6 +63,14 @@ namespace AuthFun.Controllers
             TempData["Error"] = "Login failed";
 
             return View("login");   
+        }
+
+        [Authorize]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync();
+
+            return Redirect("secured");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
