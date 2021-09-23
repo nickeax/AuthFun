@@ -1,4 +1,5 @@
 ﻿using AuthFun.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -28,6 +29,7 @@ namespace AuthFun.Controllers
             return View();
         }
 
+        [Authorize]
         public IActionResult Secured()
         {
             return View();
