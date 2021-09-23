@@ -36,9 +36,21 @@ namespace AuthFun.Controllers
         }
 
         [HttpGet("login")]
-        public IActionResult Login()
+        public IActionResult Login(string ReturnUrl)
         {
+            ViewData["ReturnUrl"] = ReturnUrl;
             return View();
+        }
+
+        [HttpPost("login")]
+        public IActionResult Validate(string username, string password, string returnUrl)
+        {
+            if(username == "bob" && password == "pizza")
+            {
+                return Redirect(returnUrl);
+            }
+
+            return BadRequest();   
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
