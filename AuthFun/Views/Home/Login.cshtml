@@ -8,6 +8,10 @@
 <h1>Login</h1>
 <form action="/login?returnUrl=@System.Net.WebUtility.UrlEncode(returnUrl)" method="post">
     <input type="text" name="username" placeholder="Username"/>    
-    <input type="text" name="password" placeholder="Password"/>    
+    <input type="password" name="password" placeholder="Password"/>    
     <input type="submit" value="login"/>    
 </form>
+@if(!String.IsNullOrEmpty(TempData["Error"] as string))
+{
+    <h3>There fucking was an error, please try again!</h3>
+}
